@@ -82,3 +82,38 @@ in order to get row and colum we need to perform a search where
 */
 
 
+
+//how to mass update inside of Google spread sheets
+//do not delete testing higher order functions with spreadsheet searching
+//for mass update/post
+
+//first invoke global and store in variable
+//then set up headers and store in varaible
+
+//iterate over global.getDataRange().getValues()
+//see which cells you want to access by using taskHeader and dot notation
+//if conditions are met ...
+//use global.example.getRange(i + 1, taskHeader.example + 1).setValue('Something')
+
+//if change use getRange >>>> needs specific coordinates (i + 1, taskHeader.someName + 1)
+//the task header is treated as a coordinate 
+
+//if iterate us getDataRange
+
+function changeActive(){
+  var content_id = 121
+  var global = globals()
+  var tasks = global.tasks.getDataRange().getValues();
+  var taskHeader = headers.task_headers(); 
+  tasks.forEach(function(task, i){
+    if(task[taskHeader.content_id] === content_id && !task[taskHeader.is_active]){
+     global.tasks.getRange(i + 1, taskHeader.is_active + 1).setValue('True');
+    }
+  })
+  
+}
+  
+//task header is active + 1 allows us to access the index at which 
+//should change is active >>> to false when run 
+//for adjusting specific value you need to use getRange on the entire sheet which 
+//is tasks in this example
